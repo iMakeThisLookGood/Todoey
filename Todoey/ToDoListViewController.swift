@@ -11,7 +11,7 @@ import UIKit
 class ToDoListViewController: UITableViewController {
 
     //Hardcoded array items... BLEH
-    let itemArray = ["Find", "Destroy","Win"]
+    var itemArray = ["Find", "Destroy","Win"]
     
     
 
@@ -59,7 +59,40 @@ class ToDoListViewController: UITableViewController {
         
         
     }
+    //MARK: - Add new items
     
-
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            //What happends once the user hits the add button item
+           
+            //Adding the new item from the user to the table
+            self.itemArray.append(textField.text!)
+            //REQUIRED FOR TABLE TO LOAD NEW INPUT
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            //Creating a textfield to the button with a background placeholder
+            alertTextField.placeholder = "Create new item!"
+            textField = alertTextField
+            
+            
+        }
+        
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+            
+        
+        
+        
+        
+    }
+    
+    
 }
 
